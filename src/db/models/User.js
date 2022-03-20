@@ -11,8 +11,8 @@ class UserModel {
     return user;
   };
 
-  static findById = async ({ user_id }) => {
-    const user = await User.findOne({ id: user_id });
+  static findById = async ({ userId }) => {
+    const user = await User.findOne({ id: userId });
     return user;
   };
   /*
@@ -24,8 +24,8 @@ class UserModel {
   첫번째 인수를 기반으로하는 사용자를 찾을것이다
   두번째 인수 
    */
-  static update = async (user_id, updateFilter, newValue) => {
-    const filter = { id: user_id };
+  static update = async (userId, updateFilter, newValue) => {
+    const filter = { id: userId };
     const updateContent = { [updateFilter]: newValue };
     const option = { returnOriginal: false };
 
@@ -37,8 +37,8 @@ class UserModel {
     return updatedUser;
   };
 
-  static removeUser = async ({ user_id }) => {
-    await User.deleteOne({ id: user_id });
+  static removeUser = async ({ userId }) => {
+    await User.deleteOne({ id: userId });
   };
 }
 

@@ -24,11 +24,11 @@ loginRouter.post("/login", async (req, res, next) => {
 });
 
 loginRouter.get("/login/verify", verifyToken, (req, res, next) => {
-  const user_id = req.user;
-  console.log(user_id);
+  const userId = req.user;
+  console.log(userId);
   res.status(200).json({
     status: "succ",
-    user_id,
+    userId,
   });
 });
 
@@ -39,9 +39,9 @@ loginRouter.put(
   async (req, res, next) => {
     try {
       const { email, password, description, name } = req.body;
-      const user_id = req.user;
+      const userId = req.user;
       const updatedUser = await loginService.update({
-        user_id,
+        userId,
         email,
         password,
         description,
@@ -67,8 +67,8 @@ loginRouter.delete(
   checkLogin,
   async (req, res, next) => {
     try {
-      const user_id = req.user;
-      const result = await loginService.removeUser({ user_id });
+      const userId = req.user;
+      const result = await loginService.removeUser({ userId });
       if (result.errorMessage) {
         throw new Error(result.errorMessage);
       }
