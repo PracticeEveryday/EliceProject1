@@ -1,5 +1,7 @@
 import { Router } from "express";
 
+import { registerService } from "../service/registerService.js";
+
 const registerRouter = Router();
 
 registerRouter.post("/register", async (req, res, next) => {
@@ -9,3 +11,5 @@ registerRouter.post("/register", async (req, res, next) => {
     next(error);
   }
 });
+
+export { registerRouter };
