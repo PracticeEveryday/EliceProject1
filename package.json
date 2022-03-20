@@ -6,10 +6,13 @@
   "author": "DongHyun Kim <developerforus@gmail.com\ngit config --global user.email developerforus@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "crypt": "^0.0.2",
+    "crypto": "^1.0.1",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "mongoose": "^6.2.7",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "uuid": "^8.3.2"
   },
   "scripts": {
     "start": "yarn run nodemon index.js"
