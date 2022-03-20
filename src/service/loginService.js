@@ -2,6 +2,7 @@ import { UserModel } from "../db/index.js";
 
 import { hashPassword } from "../utils/hashPassword.js";
 import { makeToken } from "../utils/makeToken.js";
+
 class loginService {
   static getUser = async ({ email, password }) => {
     const loginUser = await UserModel.findByEmail({ email });
