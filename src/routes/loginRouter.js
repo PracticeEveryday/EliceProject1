@@ -1,8 +1,9 @@
 import { Router } from "express";
 
 import { loginService } from "../service/loginService.js";
-import { verifyToken } from "../middleware/verifyToken.js";
 
+import { verifyToken } from "../middleware/verifyToken.js";
+import { checkLogin } from "../middleware/checkLogin.js";
 const loginRouter = Router();
 
 loginRouter.post("/login", async (req, res, next) => {
@@ -31,4 +32,15 @@ loginRouter.get("/login/verify", verifyToken, (req, res, next) => {
   });
 });
 
+loginRouter.put(
+  "/login/change",
+  verifyToken,
+  checkLogin,
+  async (req, res, next) => {
+    const { email, password, description } = req.user;
+    res.status(200).json({
+      status: "succ",
+    });
+  }
+);
 export { loginRouter };
