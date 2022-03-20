@@ -1,0 +1,18 @@
+{
+  "name": "Project1",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/PracticeEveryday/Project1.git",
+  "author": "DongHyun Kim <developerforus@gmail.com\ngit config --global user.email developerforus@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "mongoose": "^6.2.7",
+    "nodemon": "^2.0.15"
+  },
+  "scripts": {
+    "start": "yarn run nodemon index.js"
+  },
+  "type": "module"
+}
