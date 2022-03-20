@@ -2,9 +2,18 @@ import { Like } from "../schemas/like.js";
 
 class likeModel {
   static addLike = async (addLikeDate) => {
-    console.log(addLikeDate);
     const likedUser = await Like.create(addLikeDate);
     return likedUser;
+  };
+
+  static deleteLike = async ({ likeId }) => {
+    console.log(likeId);
+    await Like.findOneAndDelete({ id: likeId });
+  };
+
+  static findById = async ({ likeId }) => {
+    const like = await Like.findOne({ id: likeId });
+    return like;
   };
 }
 

@@ -11,12 +11,12 @@ const verifyToken = (req, res, next) => {
   } else {
     const jwtKey = process.env.JWT_KEY;
     const decoded = jwt.verify(token, jwtKey);
-    console.log("decoded", decoded.userId);
+    //console.log("decoded", decoded.userId);
     req.user = {
       userId: decoded.userId,
       ObjectId: decoded.ObjectId,
     };
-    console.log("버리파이에서 리크유저", req.user);
+    //console.log("버리파이에서 리크유저", req.user);
 
     // console.log(decoded);
     next();
