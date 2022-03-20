@@ -4,6 +4,7 @@ import express from "express";
 import { indexRouter } from "./routes/indexRouter.js";
 import { registerRouter } from "./routes/registerRouter.js";
 import { loginRouter } from "./routes/loginRouter.js";
+import { likeRouter } from "./routes/likeRouter.js";
 
 const app = express();
 
@@ -16,5 +17,6 @@ app.use(express.json());
 app.use(indexRouter);
 app.use(registerRouter);
 app.use(loginRouter);
+app.use(likeRouter);
 
 export { app };
