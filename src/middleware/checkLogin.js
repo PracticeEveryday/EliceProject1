@@ -4,7 +4,6 @@ const checkLogin = (req, res, next) => {
       status: "fail",
       message: "로그인 하고 오셔야 합니다.",
     });
-    next();
   } else {
     next();
   }

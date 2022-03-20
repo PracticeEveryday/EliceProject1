@@ -60,4 +60,22 @@ loginRouter.put(
     }
   }
 );
+
+loginRouter.delete(
+  "/login/delete",
+  verifyToken,
+  checkLogin,
+  async (req, res, next) => {
+    try {
+      const user_id = req.user;
+      const result = await loginService.removeUser({ user_id });
+      if (result.errorMessage) {
+        throw new Error(result.errorMessage);
+      }
+      res.status(200).json(result);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
 export { loginRouter };

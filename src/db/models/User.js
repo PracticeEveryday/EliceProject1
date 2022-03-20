@@ -36,6 +36,10 @@ class UserModel {
     );
     return updatedUser;
   };
+
+  static removeUser = async ({ user_id }) => {
+    await User.deleteOne({ id: user_id });
+  };
 }
 
 export { UserModel };

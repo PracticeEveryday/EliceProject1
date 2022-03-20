@@ -35,6 +35,7 @@ class loginService {
     }
 
     let checkEmail = await UserModel.findByEmail({ email });
+
     if (checkEmail) {
       const errorMessage = "이미 가입되어 있는 email입니다.";
       return { errorMessage };
@@ -69,6 +70,18 @@ class loginService {
     }
 
     return user;
+  };
+
+  static removeUser = async ({ user_id }) => {
+    const user = UserModel.findById({ user_id });
+    if (!user) {
+      const errorMessage = "해당 id로 가입된 유저가 없습니다.";
+      return { errorMessage };
+    }
+    await UserModel.removeUser({ user_id });
+    return {
+      status: "success",
+    };
   };
 }
 
