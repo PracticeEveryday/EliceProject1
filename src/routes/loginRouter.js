@@ -37,10 +37,27 @@ loginRouter.put(
   verifyToken,
   checkLogin,
   async (req, res, next) => {
-    const { email, password, description } = req.user;
-    res.status(200).json({
-      status: "succ",
-    });
+    try {
+      const { email, password, description, name } = req.body;
+      const user_id = req.user;
+      const updatedUser = await loginService.update({
+        user_id,
+        email,
+        password,
+        description,
+        name,
+      });
+
+      if (updatedUser.errorMessage) {
+        throw new Error(updatedUser.errorMessage);
+      }
+      res.status(200).json(updatedUser);
+    } catch (error) {
+      res.status(404).json({
+        error: "이미 가입되어 있는 email입니다. 다시 한 번 확인 부탁드립니다.",
+      });
+      next(error);
+    }
   }
 );
 export { loginRouter };
