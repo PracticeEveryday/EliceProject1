@@ -15,6 +15,12 @@ class likeModel {
     const like = await Like.findOne({ id: likeId });
     return like;
   };
+
+  static findAll = async ({ pushUser }) => {
+    const likes = await Like.find({ pushUser });
+    //console.log(likes);
+    return likes;
+  };
 }
 
 export { likeModel };

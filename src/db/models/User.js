@@ -1,10 +1,6 @@
 import { User } from "../schemas/user.js";
 
 import crypto from "crypto";
-// console.log("User static", User.setPassword);
-
-// const user = new User();
-// console.log("user instance", user.hashPassword);
 
 import jwt from "jsonwebtoken";
 
@@ -57,6 +53,7 @@ class UserModel {
   static makeToken = (object) => {
     const jwtKey = process.env.JWT_KEY;
     const token = jwt.sign(object, jwtKey, { expiresIn: "24h" });
+
     return token;
   };
 }

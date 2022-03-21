@@ -22,6 +22,12 @@ class likeService {
     await likeModel.deleteLike(likeId);
     return like;
   };
+
+  static likes = async ({ pushUser }) => {
+    console.log(pushUser);
+    const likes = await likeModel.findAll({ pushUser });
+    return likes;
+  };
 }
 
 export { likeService };
