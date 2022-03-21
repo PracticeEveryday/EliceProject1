@@ -1,12 +1,12 @@
 import { likeModel } from "../db/index.js";
 import { v4 as uuidv4 } from "uuid";
 class likeService {
-  static addLike = async ({ userId, ObjectId }) => {
+  static addLike = async ({ pushUser, pushedUser }) => {
     const id = uuidv4();
     const addLikeDate = {
       id,
-      userId,
-      ObjectId,
+      pushUser,
+      pushedUser,
     };
     const likedUser = await likeModel.addLike(addLikeDate);
     return likedUser;

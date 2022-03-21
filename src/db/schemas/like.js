@@ -6,13 +6,13 @@ const likeSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    ObjectId: {
+    pushedUser: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
-    userId: {
-      type: String,
-      required: true,
+    pushUser: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
     },
   },
   {
