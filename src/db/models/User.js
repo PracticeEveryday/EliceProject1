@@ -24,9 +24,12 @@ class UserModel {
     return user;
   };
 
-  static update = async (userId, updateFilter, newValue) => {
+  static update = async (userId, newValue) => {
     const filter = { id: userId };
-    const updateContent = { [updateFilter]: newValue };
+
+    const updateContent = newValue;
+    console.log(updateContent);
+
     const option = { returnOriginal: false };
 
     const updatedUser = await User.findOneAndUpdate(
@@ -34,6 +37,7 @@ class UserModel {
       updateContent,
       option
     );
+    console.log(updatedUser);
     return updatedUser;
   };
 

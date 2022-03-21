@@ -39,7 +39,9 @@ loginRouter.put(
   async (req, res, next) => {
     try {
       const { email, password, description, name } = req.body;
-      const userId = req.user;
+
+      const userId = req.user.userId;
+
       const updatedUser = await loginService.update({
         userId,
         email,

@@ -26,11 +26,8 @@ class loginService {
   };
 
   static update = async ({ userId, email, password, description, name }) => {
-    const hashedPassword = hashPassword(password);
-    const updateData = { name, email, password: hashedPassword, description };
-
     let user = await UserModel.findById({ userId });
-    // console.log(user);
+
     if (!user) {
       const errorMessage = "해당 id로 가입된 유저가 없습니다.";
       return { errorMessage };
@@ -43,33 +40,14 @@ class loginService {
       return { errorMessage };
     }
 
-    if (updateData.name) {
-      const updateFilter = "name";
-      const newValue = updateData.name;
+    const newValue = {
+      email,
+      password: UserModel.hashPassword(password),
+      description,
+      name,
+    };
 
-      user = await UserModel.update(userId, updateFilter, newValue);
-    }
-
-    if (updateData.email) {
-      const updateFilter = "email";
-      const newValue = updateData.email;
-
-      user = await UserModel.update(userId, updateFilter, newValue);
-    }
-
-    if (updateData.password) {
-      const updateFilter = "password";
-      const newValue = updateData.password;
-
-      user = await UserModel.update(userId, updateFilter, newValue);
-    }
-
-    if (updateData.description) {
-      const updateFilter = "description";
-      const newValue = updateData.description;
-
-      user = await UserModel.update(userId, updateFilter, newValue);
-    }
+    user = await UserModel.update(userId, newValue);
 
     return user;
   };
