@@ -1,21 +1,17 @@
 import { UserModel } from "../db/index.js";
 
-import { hashPassword } from "../utils/hashPassword.js";
-import { makeToken } from "../utils/makeToken.js";
-
 class loginService {
   static getUser = async ({ email, password }) => {
     const loginUser = await UserModel.findByEmail({ email });
-    const hashedPassword = hashPassword(password);
+    const hashedPassword = UserModel.hashPassword(password);
+
     if (!loginUser) {
       const errorMessage =
         "해당 이메일로 가입된 유저가 없습니다. 다시 한 번 확인해 주세요";
       return { errorMessage };
     } else if (loginUser.password === hashedPassword) {
-      // console.log("loginUser", loginUser._id);
       const ObjectId = String(loginUser._id);
-      // console.log(ObjectId);
-      const token = makeToken({
+      const token = UserModel.makeToken({
         userId: loginUser.id,
         ObjectId: ObjectId,
       });

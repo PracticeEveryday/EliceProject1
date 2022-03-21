@@ -1,7 +1,17 @@
 import { User } from "../schemas/user.js";
-console.log("User static", User.setPassword);
-const user = new User();
-console.log("user instance", user.hashPassword);
+
+import crypto from "crypto";
+// console.log("User static", User.setPassword);
+
+// const user = new User();
+// console.log("user instance", user.hashPassword);
+
+import jwt from "jsonwebtoken";
+
+import dotenv from "dotenv";
+
+dotenv.config();
+
 class UserModel {
   static create = async (newUserData) => {
     const createdUser = await User.create(newUserData);
@@ -33,6 +43,21 @@ class UserModel {
 
   static removeUser = async ({ userId }) => {
     await User.deleteOne({ id: userId });
+  };
+
+  static hashPassword = (password) => {
+    const hashedPassword = crypto
+      .createHash("sha512")
+      .update(password)
+      .digest("hex");
+
+    return hashedPassword;
+  };
+
+  static makeToken = (object) => {
+    const jwtKey = process.env.JWT_KEY;
+    const token = jwt.sign(object, jwtKey, { expiresIn: "24h" });
+    return token;
   };
 }
 
