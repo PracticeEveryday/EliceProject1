@@ -51,7 +51,27 @@ likeRouter.get("/likes", async (req, res, next) => {
       status: "succ",
       message: `내가 누른 좋아요 개수는 ${
         likes.length
-      }개 입니다.그 유저 이름은 ${likes.map((item) => item.pushUser)}입니다.`,
+      }개 입니다.그 유저 이름은 ${likes.map((item) => item.pushedUser)}입니다.`,
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
+likeRouter.get("/likes/user", async (req, res, next) => {
+  try {
+    const pushUser = req.user.ObjectId;
+
+    const likedUser = await likeService.likedUsers({ pushUser });
+    // console.log(likedUser);
+    // console.log("likes", likes);
+    res.status(200).json({
+      status: "succ",
+      message: `${likedUser[0].pushUser.name}가 누른 좋아요 개수는 ${
+        likedUser.length
+      }개 입니다.그 유저 이름 ${likedUser.map((item) => {
+        return item.pushedUser.name;
+      })}은 입니다.`,
     });
   } catch (error) {
     next(error);

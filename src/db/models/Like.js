@@ -21,6 +21,13 @@ class likeModel {
     //console.log(likes);
     return likes;
   };
+
+  static findLikedUser = async ({ pushUser }) => {
+    const likedUser = await Like.find({ pushUser })
+      .populate("pushedUser")
+      .populate("pushUser");
+    return likedUser;
+  };
 }
 
 export { likeModel };

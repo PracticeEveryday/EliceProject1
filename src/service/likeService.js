@@ -24,9 +24,13 @@ class likeService {
   };
 
   static likes = async ({ pushUser }) => {
-    console.log(pushUser);
     const likes = await likeModel.findAll({ pushUser });
     return likes;
+  };
+
+  static likedUsers = async ({ pushUser }) => {
+    const likedUser = await likeModel.findLikedUser({ pushUser });
+    return likedUser;
   };
 }
 
