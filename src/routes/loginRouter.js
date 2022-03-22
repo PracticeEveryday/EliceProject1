@@ -28,7 +28,7 @@ loginRouter.get("/login/verify", verifyToken, (req, res, next) => {
   //console.log(userId);
   res.status(200).json({
     status: "succ",
-    userId,
+    ...userId,
   });
 });
 

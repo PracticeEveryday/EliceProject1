@@ -1,37 +1,29 @@
 import jwt from "jsonwebtoken";
 
-// import { promisify } from "util";
-
-//import { redisClient } from "./redis.js";
-
 import dotenv from "dotenv";
 
 dotenv.config();
 
-// jwt 토큰 키
 const jwtKey = process.env.JWT_KEY;
 
-const makeToken = (object) => {
-  const payload = object;
-  object = { userId: object.userId };
+const makeToken = ({ userId, ObjectId }) => {
+  const payload = { userId, ObjectId };
 
   const token = jwt.sign(payload, jwtKey, {
-    // secret으로 sign하여 발급하고 return
-    expiresIn: "1h", // 유효기간
+    expiresIn: "1h",
   });
 
   return token;
 };
 
 const verify = (token) => {
-  // access token 검증
   let decoded = null;
   try {
     decoded = jwt.verify(token, jwtKey);
     return {
-      ok: true,
+      status: "succ",
       userId: decoded.userId,
-      // ObjectId: decoded.ObjectId,
+      ObjectId: decoded.ObjectId,
     };
   } catch (err) {
     return {
@@ -43,15 +35,13 @@ const verify = (token) => {
 
 const refresh = () => {
   return jwt.sign({}, jwtKey, {
-    // refresh token은 payload 없이 발급
     expiresIn: "14d",
   });
 };
 
-const refreshVerify = async (token) => {
+const refreshVerify = async (refreshToken) => {
   try {
-    const verifyRefreshToken = verify(token, jwtKey);
-    console.log("verifyRefreshToken", verifyRefreshToken);
+    const verifyRefreshToken = await verify(refreshToken, jwtKey);
     if (verifyRefreshToken) {
       try {
         return true;
