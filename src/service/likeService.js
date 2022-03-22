@@ -12,8 +12,8 @@ class likeService {
     return likedUser;
   };
 
-  static deleteLike = async ({ likeId }) => {
-    const like = await likeModel.findById({ likeId });
+  static deleteLike = async (likeId) => {
+    const like = await likeModel.findById(likeId);
     if (!like) {
       const errorMessage =
         "해당 아이디의 좋아요가 없습니다. 다시 한 번 확인 해주세요";

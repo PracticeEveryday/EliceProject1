@@ -27,8 +27,9 @@ likeRouter.post("/like/pushLike", async (req, res, next) => {
 
 likeRouter.post("/like/backLike", async (req, res, next) => {
   try {
-    const { likeId } = req.body;
-    const deletedLike = await likeService.deleteLike({ likeId });
+    const likeId = req.body;
+    console.log(likeId);
+    const deletedLike = await likeService.deleteLike(likeId);
     if (deletedLike.errorMessage) {
       throw new Error(deletedLike.errorMessage);
     }
@@ -69,9 +70,9 @@ likeRouter.get("/likes/user", async (req, res, next) => {
       status: "succ",
       message: `${likedUser[0].pushUser.name}가 누른 좋아요 개수는 ${
         likedUser.length
-      }개 입니다.그 유저 이름 ${likedUser.map((item) => {
+      }개 입니다.그 유저 이름은 ${likedUser.map((item) => {
         return item.pushedUser.name;
-      })}은 입니다.`,
+      })} 입니다.`,
     });
   } catch (error) {
     next(error);

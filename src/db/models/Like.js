@@ -7,7 +7,6 @@ class likeModel {
   };
 
   static deleteLike = async ({ likeId }) => {
-    console.log(likeId);
     await Like.findOneAndDelete({ id: likeId });
   };
 
