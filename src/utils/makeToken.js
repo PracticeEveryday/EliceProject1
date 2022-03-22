@@ -48,16 +48,12 @@ const refresh = () => {
   });
 };
 
-const refreshVerify = async (token, userId) => {
-  /* redis 모듈은 기본적으로 promise를 반환하지 않으므로,
-       promisify를 이용하여 promise를 반환하게 해줍니다.*/
-  //const getAsync = promisify(redisClient.get).bind(redisClient);
-
+const refreshVerify = async (token) => {
   try {
-    const data = await getAsync(userId); // refresh token 가져오기
-    if (token === data) {
+    const verifyRefreshToken = verify(token, jwtKey);
+    console.log("verifyRefreshToken", verifyRefreshToken);
+    if (verifyRefreshToken) {
       try {
-        jwt.verify(token, jwtKey);
         return true;
       } catch (err) {
         return false;
