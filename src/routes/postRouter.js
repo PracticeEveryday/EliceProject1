@@ -23,4 +23,20 @@ postRouter.post("/post", async (req, res, next) => {
   }
 });
 
+postRouter.delete("/post/delete/:id", async (req, res, next) => {
+  try {
+    const postId = req.params.id;
+    const writeUser = req.user.ObjectId;
+    const removedPost = await PostService.removePost({ postId, writeUser });
+    if (removedPost.errorMessage) {
+      throw new Error(removedPost.errorMessage);
+    }
+    res.status(200).json({
+      removedPost,
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
 export { postRouter };
