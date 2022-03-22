@@ -1,23 +1,38 @@
 import { UserModel } from "../db/index.js";
 
+import { hashPassword } from "../utils/hashPassword.js";
+//import { makeToken } from "../utils/makeToken.js";
+
+import {
+  makeToken,
+  verify,
+  refresh,
+  refreshVerify,
+} from "../utils/makeToken.js";
+
+//import { redisClient } from "../utils/redis.js";
+
 class loginService {
   static getUser = async ({ email, password }) => {
     const loginUser = await UserModel.findByEmail({ email });
-    const hashedPassword = UserModel.hashPassword(password);
+    const hashedPassword = hashPassword(password);
 
     if (!loginUser) {
       const errorMessage =
         "해당 이메일로 가입된 유저가 없습니다. 다시 한 번 확인해 주세요";
       return { errorMessage };
     } else if (loginUser.password === hashedPassword) {
-      const ObjectId = String(loginUser._id);
-      const token = UserModel.makeToken({
+      //      const ObjectId = String(loginUser._id);
+
+      const accessToken = makeToken({
         userId: loginUser.id,
-        ObjectId: ObjectId,
       });
+      const refreshToken = refresh();
+      //redisClient.set(loginUser.id, refreshToken);
+
       return {
-        token,
-        name: loginUser.name,
+        accessToken,
+        refreshToken,
       };
     } else {
       const errorMessage = "비밀번호가 틀립니다 다시 한 번 확인해 주세요";
@@ -42,7 +57,7 @@ class loginService {
 
     const newValue = {
       email,
-      password: UserModel.hashPassword(password),
+      password: hashPassword(password),
       description,
       name,
     };

@@ -25,7 +25,7 @@ loginRouter.post("/login", async (req, res, next) => {
 
 loginRouter.get("/login/verify", verifyToken, (req, res, next) => {
   const userId = req.user;
-  console.log(userId);
+  //console.log(userId);
   res.status(200).json({
     status: "succ",
     userId,

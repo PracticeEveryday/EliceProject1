@@ -45,21 +45,21 @@ class UserModel {
     await User.deleteOne({ id: userId });
   };
 
-  static hashPassword = (password) => {
-    const hashedPassword = crypto
-      .createHash("sha512")
-      .update(password)
-      .digest("hex");
+  // static hashPassword = (password) => {
+  //   const hashedPassword = crypto
+  //     .createHash("sha512")
+  //     .update(password)
+  //     .digest("hex");
 
-    return hashedPassword;
-  };
+  //   return hashedPassword;
+  // };
 
-  static makeToken = (object) => {
-    const jwtKey = process.env.JWT_KEY;
-    const token = jwt.sign(object, jwtKey, { expiresIn: "24h" });
+  // static makeToken = (object) => {
+  //   const jwtKey = process.env.JWT_KEY;
+  //   const token = jwt.sign(object, jwtKey, { expiresIn: "24h" });
 
-    return token;
-  };
+  //   return token;
+  // };
 }
 
 export { UserModel };
