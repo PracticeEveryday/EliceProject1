@@ -1,9 +1,5 @@
 import { User } from "../schemas/user.js";
 
-import crypto from "crypto";
-
-import jwt from "jsonwebtoken";
-
 import dotenv from "dotenv";
 
 dotenv.config();

@@ -3,12 +3,7 @@ import { UserModel } from "../db/index.js";
 import { hashPassword } from "../utils/hashPassword.js";
 //import { makeToken } from "../utils/makeToken.js";
 
-import {
-  makeToken,
-  verify,
-  refresh,
-  refreshVerify,
-} from "../utils/makeToken.js";
+import { makeToken, refresh } from "../utils/makeToken.js";
 
 //import { redisClient } from "../utils/redis.js";
 

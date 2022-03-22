@@ -6,6 +6,7 @@ import { registerRouter } from "./routes/registerRouter.js";
 import { loginRouter } from "./routes/loginRouter.js";
 import { likeRouter } from "./routes/likeRouter.js";
 import { refreshRouter } from "./routes/refreshRouter.js";
+import { postRouter } from "./routes/postRouter.js";
 
 const app = express();
 
@@ -21,5 +22,6 @@ app.use(indexRouter);
 app.use(registerRouter);
 app.use(loginRouter);
 app.use(likeRouter);
+app.use(postRouter);
 
 export { app };
