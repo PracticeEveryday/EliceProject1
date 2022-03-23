@@ -15,6 +15,17 @@ class PostModel {
     const removedPost = await Post.findOneAndDelete({ id: postId });
     return removedPost;
   };
+
+  static modifyPost = async ({ postId, context, tagUser }) => {
+    const filter = { id: postId };
+    const newValue = {
+      context,
+      tagUser,
+    };
+    const option = { returnOriginal: false };
+    const modifiedPost = await Post.findOneAndUpdate(filter, newValue, option);
+    return modifiedPost;
+  };
 }
 
 export { PostModel };
