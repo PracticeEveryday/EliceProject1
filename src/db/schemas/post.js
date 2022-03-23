@@ -10,8 +10,7 @@ const postSchema = new mongoose.Schema({
     ref: "User",
   },
   tagUser: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+    type: [String],
   },
   context: {
     type: String,
