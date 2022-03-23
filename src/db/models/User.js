@@ -24,7 +24,6 @@ class UserModel {
     const filter = { id: userId };
 
     const updateContent = newValue;
-    console.log(updateContent);
 
     const option = { returnOriginal: false };
 

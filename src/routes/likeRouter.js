@@ -19,8 +19,15 @@ likeRouter.post("/like/pushLike", async (req, res, next) => {
       pushUser,
       pushedUser,
     });
+    if (likedUser.errorMessage) {
+      throw new Error(likedUser.errorMessage);
+    }
     res.status(200).json(likedUser);
   } catch (error) {
+    res.status(404).json({
+      status: "fail",
+      errorMessage: "이미 해당 게시물에 좋아요를 누르셨습니다.",
+    });
     next(error);
   }
 });

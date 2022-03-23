@@ -8,6 +8,13 @@ class likeService {
       pushUser,
       pushedUser,
     };
+
+    const ExistLike = await likeModel.overlapCheck({ pushUser, pushedUser });
+    if (ExistLike) {
+      const errorMessage = "이미 해당 게시물에 좋아요를 누르셨습니다.";
+      return { errorMessage };
+    }
+
     const likedUser = await likeModel.addLike(addLikeDate);
     return likedUser;
   };

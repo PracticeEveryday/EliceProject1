@@ -55,4 +55,5 @@ const refreshVerify = async (refreshToken) => {
     return false;
   }
 };
+
 export { makeToken, verify, refresh, refreshVerify };

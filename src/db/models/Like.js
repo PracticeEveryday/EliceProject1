@@ -27,6 +27,15 @@ class likeModel {
       .populate("pushUser");
     return likedUser;
   };
+
+  static overlapCheck = async ({ pushUser, pushedUser }) => {
+    const ExistLike = await Like.findOne({ pushUser });
+    if (String(ExistLike.pushedUser) === pushedUser) {
+      return ExistLike;
+    } else {
+      return null;
+    }
+  };
 }
 
 export { likeModel };
