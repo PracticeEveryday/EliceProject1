@@ -27,6 +27,11 @@ class AwardModel {
     const removedAward = await Award.findOneAndDelete({ awardId });
     return removedAward;
   };
+
+  static findByUserId = async ({ userId }) => {
+    const awards = await Award.find().where("userId").equals(userId);
+    return awards;
+  };
 }
 
 export { AwardModel };

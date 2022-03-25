@@ -65,4 +65,20 @@ awardRouter.delete("/awards/:awardId", async (req, res, next) => {
   }
 });
 
+awardRouter.get("/awardlist", async (req, res, next) => {
+  try {
+    const userId = req.user.ObjectId;
+    const awardList = await awardService.findUserAward({ userId });
+    if (awardList.errorMessage) {
+      throw new Error(awardList.errorMessage);
+    }
+    res.status(200).json({
+      "award counts": `${awardList.length}`,
+      "award list": `${awardList.map((item) => item.title)}`,
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
 export { awardRouter };

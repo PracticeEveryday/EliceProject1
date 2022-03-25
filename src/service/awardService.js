@@ -43,6 +43,15 @@ class awardService {
       return { status: "succ" };
     }
   };
+
+  static findUserAward = async ({ userId }) => {
+    const awards = await AwardModel.findByUserId({ userId });
+    if (!awards) {
+      const errorMessage = "해당 user의 수상내역이 없습니다.";
+      return { errorMessage };
+    }
+    return awards;
+  };
 }
 
 export { awardService };
