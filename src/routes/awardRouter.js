@@ -16,4 +16,16 @@ awardRouter.get("/award", (req, res, next) => {
   });
 });
 
+awardRouter.post("/award/create", async (req, res, next) => {
+  try {
+    const userId = req.user.ObjectId;
+    const { title, description } = req.body;
+    const newAward = await awardService.create({ userId, title, description });
+
+    res.status(200).json(newAward);
+  } catch (error) {
+    next(error);
+  }
+});
+
 export { awardRouter };

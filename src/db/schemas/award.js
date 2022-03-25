@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const awardSchema = new mongoose.Schema({
-  id: {
+  awardId: {
     type: String,
     required: true,
   },
