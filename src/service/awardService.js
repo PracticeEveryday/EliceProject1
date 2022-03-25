@@ -52,6 +52,11 @@ class awardService {
     }
     return awards;
   };
+
+  static findAwardUser = async ({ awardId }) => {
+    const userOfAward = await AwardModel.findUser({ awardId });
+    return userOfAward;
+  };
 }
 
 export { awardService };

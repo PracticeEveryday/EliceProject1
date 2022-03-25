@@ -32,6 +32,14 @@ class AwardModel {
     const awards = await Award.find().where("userId").equals(userId);
     return awards;
   };
+
+  static findUser = async ({ awardId }) => {
+    const userOfAward = await Award.findOne()
+      .where("awardId")
+      .equals(awardId)
+      .populate("userId");
+    return userOfAward;
+  };
 }
 
 export { AwardModel };

@@ -81,4 +81,18 @@ awardRouter.get("/awardlist", async (req, res, next) => {
   }
 });
 
+awardRouter.get("/award/:awardId", async (req, res, next) => {
+  try {
+    const awardId = req.params.awardId;
+
+    const userOfAward = await awardService.findAwardUser({ awardId });
+    res.status(200).json({
+      status: "succ",
+      userofAward: userOfAward.userId.name,
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
 export { awardRouter };
