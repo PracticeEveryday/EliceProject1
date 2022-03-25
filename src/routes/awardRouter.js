@@ -50,4 +50,19 @@ awardRouter.put("/awards/:awardId", async (req, res, next) => {
   }
 });
 
+awardRouter.delete("/awards/:awardId", async (req, res, next) => {
+  try {
+    const awardId = req.params.awardId;
+    const removedAward = await awardService.deleteAward({ awardId });
+
+    if (removedAward.errorMessage) {
+      throw new Error(removedAward.errorMessage);
+    }
+
+    res.status(200).json(removedAward);
+  } catch (error) {
+    next(error);
+  }
+});
+
 export { awardRouter };

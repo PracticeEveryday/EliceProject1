@@ -22,6 +22,11 @@ class AwardModel {
     );
     return updatedData;
   };
+
+  static delete = async ({ awardId }) => {
+    const removedAward = await Award.findOneAndDelete({ awardId });
+    return removedAward;
+  };
 }
 
 export { AwardModel };
