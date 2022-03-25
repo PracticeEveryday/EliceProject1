@@ -1,6 +1,8 @@
 import { UserModel } from "./models/User.js";
 import { likeModel } from "./models/Like.js";
 import { PostModel } from "./models/Post.js";
+import { AwardModel } from "./models/Award.js";
+
 import mongoose from "mongoose";
 
 import dotenv from "dotenv";
@@ -15,4 +17,4 @@ mongoose
     console.log("몬고디비 연결에 실패하였습니다.");
   });
 
-export { UserModel, likeModel, PostModel };
+export { UserModel, likeModel, PostModel, AwardModel };
