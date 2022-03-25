@@ -12,6 +12,23 @@ class awardService {
     const newAward = await AwardModel.create(newAwardData);
     return newAward;
   };
+
+  static modify = async ({ userId, awardId, title, description }) => {
+    let award = await AwardModel.findById({ awardId });
+    if (!award) {
+      const errorMessage = "해당 수상 이력이 없습니다.";
+      return { errorMessage };
+    }
+
+    if (String(award.userId) !== userId) {
+      const errorMessage = "하당 수상자가 아닙니다.";
+      return { errorMessage };
+    }
+    const updateData = { title, description };
+
+    award = await AwardModel.update(userId, updateData);
+    return award;
+  };
 }
 
 export { awardService };

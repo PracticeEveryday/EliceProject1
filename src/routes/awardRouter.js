@@ -28,4 +28,26 @@ awardRouter.post("/award/create", async (req, res, next) => {
   }
 });
 
+awardRouter.put("/awards/:awardId", async (req, res, next) => {
+  try {
+    const userId = req.user.ObjectId;
+    const awardId = req.params.awardId;
+    const { title, description } = req.body;
+
+    const modifiedAward = await awardService.modify({
+      userId,
+      awardId,
+      title,
+      description,
+    });
+
+    if (modifiedAward.errorMessage) {
+      throw new Error(modifiedAward.errorMessage);
+    }
+    res.status(200).json(modifiedAward);
+  } catch (error) {
+    next(error);
+  }
+});
+
 export { awardRouter };
