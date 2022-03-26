@@ -2,6 +2,7 @@ import { UserModel } from "./models/User.js";
 import { likeModel } from "./models/Like.js";
 import { PostModel } from "./models/Post.js";
 import { AwardModel } from "./models/Award.js";
+import { EducationModel } from "./models/Education";
 
 import mongoose from "mongoose";
 
@@ -17,4 +18,4 @@ mongoose
     console.log("몬고디비 연결에 실패하였습니다.");
   });
 
-export { UserModel, likeModel, PostModel, AwardModel };
+export { UserModel, likeModel, PostModel, AwardModel, EducationModel };

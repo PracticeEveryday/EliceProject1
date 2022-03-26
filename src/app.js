@@ -8,6 +8,7 @@ import { likeRouter } from "./routes/likeRouter.js";
 import { refreshRouter } from "./routes/refreshRouter.js";
 import { postRouter } from "./routes/postRouter.js";
 import { awardRouter } from "./routes/awardRouter.js";
+import { educationRouter } from "./routes/educationRouter.js";
 
 const app = express();
 
@@ -25,5 +26,5 @@ app.use(loginRouter);
 app.use(likeRouter);
 app.use(postRouter);
 app.use(awardRouter);
-
+app.use(educationRouter);
 export { app };
