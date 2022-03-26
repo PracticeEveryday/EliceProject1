@@ -27,4 +27,5 @@ app.use(likeRouter);
 app.use(postRouter);
 app.use(awardRouter);
 app.use(educationRouter);
+
 export { app };
