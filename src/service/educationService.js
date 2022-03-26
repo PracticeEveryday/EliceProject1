@@ -11,6 +11,17 @@ class educationService {
     const newEducation = await EducationModel.create(newEducationData);
     return newEducation;
   };
+
+  static findUserSchool = async ({ userId }) => {
+    const user = await EducationModel.findById({ userId });
+
+    if (!user) {
+      const errorMessage = "해당 유저의 학교 정보가 없습니다.";
+      return { errorMessage };
+    }
+    const schoolsOfUser = await EducationModel.findUserSchool({ userId });
+    return schoolsOfUser;
+  };
 }
 
 export { educationService };
