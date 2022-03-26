@@ -8,6 +8,7 @@ import { likeRouter } from "./routes/likeRouter.js";
 import { refreshRouter } from "./routes/refreshRouter.js";
 import { postRouter } from "./routes/postRouter.js";
 import { awardRouter } from "./routes/awardRouter.js";
+
 const app = express();
 
 // POST 요청 시 Body 사용을 위한 기본코드
