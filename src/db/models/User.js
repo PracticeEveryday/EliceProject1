@@ -36,8 +36,17 @@ class UserModel {
     return updatedUser;
   };
 
-  static removeUser = async ({ userId }) => {
-    await User.deleteOne({ id: userId });
+  static softDeleteUser = async ({ userId, whetherToDelete }) => {
+    const filter = { id: userId };
+    const updateContent = { whetherToDelete: whetherToDelete };
+    const option = { returnOriginal: false };
+
+    const softDeleteUser = await User.findOneAndUpdate(
+      filter,
+      updateContent,
+      option
+    );
+    return softDeleteUser;
   };
 
   // static hashPassword = (password) => {

@@ -63,14 +63,18 @@ loginRouter.put(
   }
 );
 
-loginRouter.delete(
+loginRouter.post(
   "/login/delete",
   verifyToken,
   checkLogin,
   async (req, res, next) => {
     try {
-      const userId = req.user;
-      const result = await loginService.removeUser({ userId });
+      const userId = req.user.userId;
+      const whetherToDelete = req.body.whetherToDelete;
+      const result = await loginService.softDeleteUser({
+        userId,
+        whetherToDelete,
+      });
       if (result.errorMessage) {
         throw new Error(result.errorMessage);
       }

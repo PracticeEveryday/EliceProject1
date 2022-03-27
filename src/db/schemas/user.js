@@ -25,6 +25,11 @@ const userSchema = new mongoose.Schema(
       required: true,
       default: "description 추가하지 않았습니다.",
     },
+    whetherToDelete: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
   },
   {
     timestamps: true,

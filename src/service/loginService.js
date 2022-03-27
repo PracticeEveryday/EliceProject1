@@ -62,16 +62,17 @@ class loginService {
     return user;
   };
 
-  static removeUser = async ({ userId }) => {
+  static softDeleteUser = async ({ userId, whetherToDelete }) => {
     const user = UserModel.findById({ userId });
     if (!user) {
       const errorMessage = "해당 id로 가입된 유저가 없습니다.";
       return { errorMessage };
     }
-    await UserModel.removeUser({ userId });
-    return {
-      status: "success",
-    };
+    const softDeletedUser = await UserModel.softDeleteUser({
+      userId,
+      whetherToDelete,
+    });
+    return softDeletedUser;
   };
 }
 
