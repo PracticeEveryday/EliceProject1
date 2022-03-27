@@ -10,7 +10,7 @@ const makeToken = ({ userId, ObjectId }) => {
   const payload = { userId, ObjectId };
 
   const token = jwt.sign(payload, jwtKey, {
-    expiresIn: "1h",
+    expiresIn: "24h",
   });
 
   return token;

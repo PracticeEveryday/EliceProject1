@@ -3,6 +3,26 @@ import { educationService } from "../service/educationService";
 
 const educationRouter = Router();
 
+educationRouter.put("/educations", async (req, res, next) => {
+  try {
+    const { educationId, school, fromDate, toDate } = req.body;
+    const updatedEducation = await educationService.update({
+      educationId,
+      school,
+      fromDate,
+      toDate,
+    });
+
+    console.log(updatedEducation);
+    if (updatedEducation.errorMessage) {
+      throw new Error(updatedEducation.errorMessage);
+    }
+    res.status(200).json(updatedEducation);
+  } catch (error) {
+    next(error);
+  }
+});
+
 educationRouter.get("/education/list", async (req, res, next) => {
   try {
     const userId = req.user.ObjectId;

@@ -5,7 +5,7 @@ class EducationModel {
     const newEducation = await Education.create(newEducationData);
     return newEducation;
   };
-  static findById = async ({ userId }) => {
+  static findByUserId = async ({ userId }) => {
     const user = await Education.find().where("userId").equals(userId);
     return user;
   };
@@ -15,6 +15,25 @@ class EducationModel {
       .equals(userId)
       .populate("userId");
     return schoolOfUser;
+  };
+
+  static findByEducationId = async ({ educationId }) => {
+    const education = await Education.find()
+      .where("educationId")
+      .equals(educationId);
+    return education;
+  };
+  static update = async (educationId, updateEducationData) => {
+    const filter = { educationId: educationId };
+    const updateContext = updateEducationData;
+    const option = { returnOriginal: false };
+
+    const updatedEducation = await Education.findOneAndUpdate(
+      filter,
+      updateContext,
+      option
+    );
+    return updatedEducation;
   };
 }
 

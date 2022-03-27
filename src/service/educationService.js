@@ -13,7 +13,7 @@ class educationService {
   };
 
   static findUserSchool = async ({ userId }) => {
-    const user = await EducationModel.findById({ userId });
+    const user = await EducationModel.findByUserId({ userId });
 
     if (!user) {
       const errorMessage = "해당 유저의 학교 정보가 없습니다.";
@@ -21,6 +21,22 @@ class educationService {
     }
     const schoolsOfUser = await EducationModel.findUserSchool({ userId });
     return schoolsOfUser;
+  };
+
+  static update = async ({ educationId, school, fromDate, toDate }) => {
+    let education = await EducationModel.findByEducationId({ educationId });
+    if (!education) {
+      const errorMessage = "해당 학교 정보가 존재하지 않습니다.";
+      return { errorMessage };
+    }
+
+    const updateEducationData = {
+      school,
+      fromDate,
+      toDate,
+    };
+    education = await EducationModel.update(educationId, updateEducationData);
+    return education;
   };
 }
 
