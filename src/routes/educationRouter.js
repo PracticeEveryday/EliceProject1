@@ -3,9 +3,22 @@ import { educationService } from "../service/educationService";
 
 const educationRouter = Router();
 
-educationRouter.put("/educations", async (req, res, next) => {
+educationRouter.delete("/educations/:educationId", async (req, res, next) => {
   try {
-    const { educationId, school, fromDate, toDate } = req.body;
+    const educationId = req.params.educationId;
+    const removedEducation = await educationService.deleteEducation({
+      educationId,
+    });
+    res.status(200).json(removedEducation);
+  } catch (error) {
+    next(error);
+  }
+});
+
+educationRouter.put("/educations/:educationId", async (req, res, next) => {
+  try {
+    const educationId = req.params.educationId;
+    const { school, fromDate, toDate } = req.body;
     const updatedEducation = await educationService.update({
       educationId,
       school,
@@ -13,7 +26,6 @@ educationRouter.put("/educations", async (req, res, next) => {
       toDate,
     });
 
-    console.log(updatedEducation);
     if (updatedEducation.errorMessage) {
       throw new Error(updatedEducation.errorMessage);
     }

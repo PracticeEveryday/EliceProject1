@@ -35,6 +35,11 @@ class EducationModel {
     );
     return updatedEducation;
   };
+
+  static deleteEducation = async ({ educationId }) => {
+    const removedEducation = await Education.findOneAndDelete({ educationId });
+    return removedEducation;
+  };
 }
 
 export { EducationModel };

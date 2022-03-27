@@ -38,6 +38,23 @@ class educationService {
     education = await EducationModel.update(educationId, updateEducationData);
     return education;
   };
+
+  static deleteEducation = async ({ educationId }) => {
+    const removedEducation = await EducationModel.deleteEducation({
+      educationId,
+    });
+    if (removedEducation) {
+      return {
+        status: "succ",
+        message: "데이터가 삭제되었습니다.",
+      };
+    } else {
+      return {
+        status: "fail",
+        message: "삭제할 해당 데이터가 없습니다.",
+      };
+    }
+  };
 }
 
 export { educationService };
