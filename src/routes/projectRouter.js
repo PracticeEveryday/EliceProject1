@@ -4,6 +4,28 @@ import { ProjectService } from "../service/projectService";
 
 const projectRouter = Router();
 
+projectRouter.put("/projects/:projectId", async (req, res, next) => {
+  try {
+    const userId = req.user.ObjectId;
+    const projectId = req.params.projectId;
+    const { title, fromDate, toDate } = req.body;
+    const modifiedProject = await ProjectService.modifyProject({
+      userId,
+      projectId,
+      title,
+      fromDate,
+      toDate,
+    });
+    console.log(modifiedProject);
+    if (modifiedProject.errorMessage) {
+      throw new Error(modifiedProject.errorMessage);
+    }
+    res.status(200).json(modifiedProject);
+  } catch (error) {
+    next(error);
+  }
+});
+
 projectRouter.post("/project/create", async (req, res, next) => {
   try {
     const userId = req.user.ObjectId;
