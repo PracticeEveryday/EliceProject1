@@ -12,6 +12,7 @@ const projectShcema = new Schema({
   userId: {
     type: Schema.Types.ObjectId,
     ref: "User",
+    required: true,
   },
   fromDate: {
     type: Date,
