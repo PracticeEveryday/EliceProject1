@@ -4,6 +4,20 @@ import { ProjectService } from "../service/projectService";
 
 const projectRouter = Router();
 
+projectRouter.get("/projectlist", async (req, res, next) => {
+  try {
+    const userId = req.user.ObjectId;
+    const projects = await ProjectService.findAll({ userId });
+
+    if (projects.errorMessage) {
+      throw new Error(projects.errorMessage);
+    }
+    res.status(200).json(projects);
+  } catch (error) {
+    next(error);
+  }
+});
+
 projectRouter.put("/projects/:projectId", async (req, res, next) => {
   try {
     const userId = req.user.ObjectId;
@@ -16,7 +30,6 @@ projectRouter.put("/projects/:projectId", async (req, res, next) => {
       fromDate,
       toDate,
     });
-    console.log(modifiedProject);
     if (modifiedProject.errorMessage) {
       throw new Error(modifiedProject.errorMessage);
     }

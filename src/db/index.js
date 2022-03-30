@@ -3,7 +3,7 @@ import { likeModel } from "./models/Like.js";
 import { PostModel } from "./models/Post.js";
 import { AwardModel } from "./models/Award.js";
 import { EducationModel } from "./models/Education";
-import { ProjectModel } from "./models/Projext.js";
+import { ProjectModel } from "./models/Project.js";
 
 import mongoose from "mongoose";
 

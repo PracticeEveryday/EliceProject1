@@ -43,6 +43,15 @@ class ProjectService {
       return modifiedProject;
     }
   };
+
+  static findAll = async ({ userId }) => {
+    const projects = await ProjectModel.findAll({ userId });
+    if (!projects) {
+      const errorMessage = "해당 유저의 프로젝트 내역이 없습니다.";
+      return { errorMessage };
+    }
+    return projects;
+  };
 }
 
 export { ProjectService };
