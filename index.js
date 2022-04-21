@@ -8,4 +8,4 @@ dotenv.config();
 
 const PORT = process.env.PORT || 5001;
 
-app.listen(3000, console.log(`${PORT}번 포트 온!`));
+app.listen(PORT, console.log(`${PORT}번 포트 온!`));
